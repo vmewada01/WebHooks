@@ -40,60 +40,6 @@
 //	log.Fatal(e.Start(":8080"))
 //}
 
-//package main
-//
-//import (
-//	"fmt"
-//	"io/ioutil"
-//	"net/http"
-//
-//	"github.com/labstack/echo/v4"
-//)
-//
-//type GitHubWebhookPayload struct {
-//	Action string `json:"action"`
-//	Pusher struct {
-//		Name string `json:"name"`
-//	} `json:"pusher"`
-//	Repository struct {
-//		Name string `json:"name"`
-//	} `json:"repository"`
-//}
-//
-//func handleGitHubWebhook(c echo.Context) error {
-//	// Read raw request body
-//	body, err := ioutil.ReadAll(c.Request().Body)
-//	if err != nil {
-//		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Failed to read request body"})
-//	}
-//
-//	// Print the raw body (useful for debugging)
-//	fmt.Println("Raw GitHub Webhook Body:", string(body))
-//
-//	// Parse payload
-//	payload := new(GitHubWebhookPayload)
-//	if err := c.Bind(payload); err != nil {
-//		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid webhook payload"})
-//	}
-//
-//	// Log event details
-//	fmt.Printf("📢 Received GitHub Event: Repository=%s, Pusher=%s, Action=%s\n",
-//		payload.Repository.Name, payload.Pusher.Name, payload.Action)
-//
-//	return c.JSON(http.StatusOK, map[string]string{"message": "GitHub Webhook received successfully"})
-//}
-//
-//func main() {
-//	e := echo.New()
-//
-//	// Define the GitHub webhook endpoint
-//	e.POST("/github-webhook", handleGitHubWebhook)
-//	//Vishal
-//
-//	// Start server on port 8080
-//	e.Logger.Fatal(e.Start(":8080"))
-//}
-
 package main
 
 import (
@@ -170,5 +116,6 @@ func main() {
 	http.HandleFunc("/webhook", webhookHandler)
 	port := 8080
 	fmt.Printf("⇨ HTTP server started on :%d\n", port)
+	// Vishal
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), nil))
 }
